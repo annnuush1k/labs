@@ -1,0 +1,771 @@
+lab3
+
+//1. Ցուցադրել /etc դիրեկտորիայի բոլոր ֆայլերը,
+// որոնց անվան մեջ թվանշան կա։
+
+Professional@User-PC MINGW64 ~
+$ ls /etc | grep [[:digit:]]
+docx2txt.config
+pkcs11/
+
+//Pipe օպերատորի (նշանակվում է | սիմվոլով) միջոցով մի հրամանի STDOUT-ը կարող է
+փոխանցվել մյուսի STDIN հոսքին։ 
+
+2. Ստեղծել որոշակի պարունակությամբ ֆայլ։ Ֆայլում փնտրել այլ տողերը, որոնք
+բաղակացած են 5 տառից, և ավարտվում են lo տառերով։
+
+Professional@User-PC MINGW64 ~
+$ cat > file.txt
+ysFlo
+gajlo
+ujsauhlo
+sasjki
+barev
+sljal-lo
+Kailo
+
+Professional@User-PC MINGW64 ~
+$ egrep "^[[:alpha:]]{3}lo$" file.txt
+ysFlo
+gajlo
+Kailo
+//^-Համընկումը պետք է տեղի ունենա տողի սկզբից։
+//ընդլայնված արտահայտություններից օգտվելու համար հարվակոր է օգտվել egrep հրամանից, կամ
+//grep հրամանից հետո նշել -E պարամետրը:
+//$: Համապատասխանում է տողի վերջին:
+
+
+3. Ցուցադրել հետևյալ հրամանների տարբերությունը․
+grep -h '[A-Z]' dirlist*.txt
+grep -h '[-AZ]' dirlist*.txt
+grep -h '^[A-Z]' dirlist*.txt
+grep -h '[^A-Z]' dirlist*.txt
+
+Professional@User-PC MINGW64 ~
+$ grep -h '[A-Z]' dirlist*.txt
+gitflow-shFlags
+//որոնում է մեծատառ պարունակող տողեր:
+
+Professional@User-PC MINGW64 ~
+$ grep -h '[-AZ]' dirlist*.txt
+cygwin-console-helper.exe*
+dirmngr-client.exe*
+gawk-5.0.0.exe*
+git-flow*
+git-flow-bugfix
+git-flow-config
+git-flow-feature
+git-flow-hotfix
+git-flow-init
+git-flow-log
+git-flow-release
+git-flow-support
+git-flow-version
+gitflow-common
+gitflow-shFlags
+gpg-agent.exe*
+gpg-connect-agent.exe*
+gpg-error.exe*
+gpg-wks-server.exe*
+msys-2.0.dll*
+msys-apr-1-0.dll*
+msys-aprutil-1-0.dll*
+msys-asn1-8.dll*
+msys-assuan-0.dll*
+msys-bz2-1.dll*
+msys-cbor-0.10.dll*
+msys-com_err-1.dll*
+msys-crypt-0.dll*
+msys-crypt-2.dll*
+msys-crypto-3.dll*
+msys-edit-0.dll*
+msys-expat-1.dll*
+msys-ffi-8.dll*
+msys-fido2-1.dll*
+msys-gcc_s-seh-1.dll*
+msys-gcrypt-20.dll*
+msys-gettextlib-0-22.dll*
+msys-gettextsrc-0-22.dll*
+msys-gmp-10.dll*
+msys-gnutls-30.dll*
+msys-gpg-error-0.dll*
+msys-gssapi-3.dll*
+msys-hcrypto-4.dll*
+msys-heimbase-1.dll*
+msys-heimntlm-0.dll*
+msys-hogweed-6.dll*
+msys-hx509-5.dll*
+msys-iconv-2.dll*
+msys-idn2-0.dll*
+msys-intl-8.dll*
+msys-kafs-0.dll*
+msys-krb5-26.dll*
+msys-ksba-8.dll*
+msys-lz4-1.dll*
+msys-lzma-5.dll*
+msys-magic-1.dll*
+msys-mpfr-6.dll*
+msys-ncursesw6.dll*
+msys-nettle-8.dll*
+msys-npth-0.dll*
+msys-p11-kit-0.dll*
+msys-pcre-1.dll*
+msys-pcre2-8-0.dll*
+msys-pcre2-posix-3.dll*
+msys-perl5_36.dll*
+msys-psl-5.dll*
+msys-readline8.dll*
+msys-roken-18.dll*
+msys-sasl2-3.dll*
+msys-serf-1-0.dll*
+msys-smartcols-1.dll*
+msys-sqlite3-0.dll*
+msys-ssl-3.dll*
+msys-svn_client-1-0.dll*
+msys-svn_delta-1-0.dll*
+msys-svn_diff-1-0.dll*
+msys-svn_fs-1-0.dll*
+msys-svn_fs_fs-1-0.dll*
+msys-svn_fs_util-1-0.dll*
+msys-svn_fs_x-1-0.dll*
+msys-svn_ra-1-0.dll*
+msys-svn_ra_local-1-0.dll*
+msys-svn_ra_serf-1-0.dll*
+msys-svn_ra_svn-1-0.dll*
+msys-svn_repos-1-0.dll*
+msys-svn_subr-1-0.dll*
+msys-svn_swig_perl-1-0.dll*
+msys-svn_wc-1-0.dll*
+msys-tasn1-6.dll*
+msys-ticw6.dll*
+msys-unistring-5.dll*
+msys-uuid-1.dll*
+msys-wind-0.dll*
+msys-z.dll*
+msys-zstd-1.dll*
+nettle-hash.exe*
+nettle-lfib-stream.exe*
+nettle-pbkdf2.exe*
+p11-kit.exe*
+pinentry-w32.exe*
+pkcs1-conv.exe*
+psl-make-dafsa*
+recode-sr-latin.exe*
+sexp-conv.exe*
+ssh-add.exe*
+ssh-agent.exe*
+ssh-copy-id*
+ssh-keygen.exe*
+ssh-keyscan.exe*
+ssh-pageant.exe*
+update-ca-trust*
+winpty-agent.exe*
+winpty-debugserver.exe*
+//որոնում է «-», «A» կամ «Z» նիշերից գոնե մեկը պարունակող տողեր:
+
+Professional@User-PC MINGW64 ~
+$ grep -h '^[A-Z]' dirlist*.txt
+//որոնում է այն տողերը որոնք սկսվում են մեծատառով
+
+
+Professional@User-PC MINGW64 ~
+$ grep -h '[^A-Z]' dirlist*.txt
+[.exe*
+addgnupghome*
+applygnupgdefaults*
+arch.exe*
+astextplain*
+autopoint*
+awk.exe*
+b2sum.exe*
+backup*
+base32.exe*
+base64.exe*
+basename.exe*
+basenc.exe*
+bash.exe*
+bashbug*
+bunzip2.exe*
+bzcat.exe*
+bzcmp*
+bzdiff*
+bzegrep*
+bzfgrep*
+bzgrep*
+bzip2.exe*
+bzip2recover.exe*
+bzless*
+c_rehash*
+captoinfo.exe*
+cat.exe*
+chattr.exe*
+chcon.exe*
+//Որոնում է այն տողերը, որոնք պարունակում են մեծատառերից բացի որևէ այլ նիշ:
+//կեսի կեսն եմ թողել:)(շատ շատ էին)
+//ներքևում կավելացնեմ սրա շարունակությունը
+
+
+4. dirlist-bin.txt և dirlist-sbin.txt ֆայլերում փնտրել այն տողերը, որոնք սկսվում են bz կամ
+zip բառերով։
+
+Professional@User-PC MINGW64 ~
+$ egrep -h '^(bz|zip)' dirlist*.txt
+bzcat.exe*
+bzcmp*
+bzdiff*
+bzegrep*
+bzfgrep*
+bzgrep*
+bzip2.exe*
+bzip2recover.exe*
+bzless*
+zipgrep*
+zipinfo.exe*
+// -h, --no-filename – չի ցուցադրում համընկում պարունակող ֆայլերի անունները
+(միայն տողերը)։
+
+
+5. Ցուցադրել հետևյալ հրամանների տարբերությունը․
+grep -Eh '^(bz|gz|zip)' dirlist*.txt
+grep -Eh '^bz|gz|zip' dirlist*.txt
+
+Professional@User-PC MINGW64 ~
+$ grep -Eh '^(bz|gz|zip)' dirlist*.txt
+bzcat.exe*
+bzcmp*
+bzdiff*
+bzegrep*
+bzfgrep*
+bzgrep*
+bzip2.exe*
+bzip2recover.exe*
+bzless*
+gzexe*
+gzip.exe*
+zipgrep*
+zipinfo.exe*
+//փնտրում է այն տողերը որոնք սկսվում եմ bz, gz, zip որևէ մեկով
+
+Professional@User-PC MINGW64 ~
+$ grep -Eh '^bz|gz|zip' dirlist*.txt
+bunzip2.exe*
+bzcat.exe*
+bzcmp*
+bzdiff*
+bzegrep*
+bzfgrep*
+bzgrep*
+bzip2.exe*
+bzip2recover.exe*
+bzless*
+funzip.exe*
+gunzip*
+gzexe*
+gzip.exe*
+unzip.exe*
+unzipsfx.exe*
+zipgrep*
+zipinfo.exe*
+//փնտրում է այն տողերը որոնք սկսվում եմ bz,
+// կամ պարունակում են gz, zip բառերից որևէ մեկը
+
+
+6. Ստուգել տրված էլ․ հասցեի վավերականությունը։ Օր․՝ test@test.com
+
+Professional@User-PC MINGW64 ~
+$ echo "anahitkirakosyan1234@gmail.com" | grep -E '^[[:alnum:].]+@[[:alnum:].]+\.[[:alnum:]]+$'
+anahitkirakosyan1234@gmail.com
+
+Professional@User-PC MINGW64 ~
+$ echo "test@testcom" | egrep '^[[:alnum:].]+@[[alnum:].]+\.[[:alnum:]]+$'
+
+//^[[:alnum:].]+. Սա նշանակում է, 
+//որ տողը պետք է սկսվի (^) մեկ կամ 
+//մի քանի` (+) այբբենական թվային նիշերով ([:alnum:]) կամ կետով (.):
+
+//@` պետք է հաջորդի «@» նշանը
+
+//+ `Համապատասխանում է մեկ կամ ավելի համընկումների։
+
+// \. Ռեգուլյար արտահայտությունում նշանակում է կետային նիշ, ոչ թե «որևէ նիշ»:
+
+//տողը պետք է ավարտվի ($) մեկ կամ ավելի (+) այբբենական կամ թվային սիմվոլրով:
+
+
+7. Ստուգել տրված IPv4 հասցեի վավերականությունը։ Օր․՝ 192․168․0․1
+
+Professional@User-PC MINGW64 ~
+$ echo "192.168.0.1" | egrep "^([0-9]{1,3}\.){3}[0-9]{1,3}$"
+192.168.0.1
+
+//{3} `երեք անգամ կկրկնվի
+
+//[0-9]{1,3} ՝ նշանակում է, որ կլինի մեկից երեք նիշ(0-9):
+
+//$ ՝ նշում է տողի վերջը:
+
+//\. համապատասխանում է հենց կետին
+
+
+8. Ստեղծել որոշակի պարունակությամբ ֆայլ, որի տողերից մեկում գրել Level բառը։
+Ֆայլում փնտրել այն տողերը, որոնք պարունակում են 5 տառից բաղկացած
+պալինդրոմներ (բառեր, որոնք 2 ուղղություններով կարդացվում են նույնաբար)։
+
+
+Professional@User-PC MINGW64 ~
+$ echo -e "the word Level.\nanother palindrom madam" > forexample.txt
+
+//Ստեղծեցինք որոշակի պարունակությամբ ֆայլ՝forexample.txt
+
+Professional@User-PC MINGW64 ~
+$ egrep -i "([[:alnum:]])([[:alnum:]]).\2\1" forexample.txt
+the word Level.
+another palindrom madam
+
+//-i, --ignore-case – Անտեսել ռեգիստրը (մեծատառ, փոքրատառ)։
+//[:alnum:] `Այբբենական կամ թվային սիմվոլ։
+// . `Նշանակում է ցանկացած սիմվոլ:
+
+// -E ` ( ) { } ? + | և ընդլայնված արտահայտություններից օգտվելու համար
+
+// \2 ` հետադարձ հղում է, հիշում է երկրորդ փակագծերում () գտած սիմվոլները
+
+// \1 `հետադարձ հղում է, հիշում է առաջին փակագծերում () գտած սիմվոլները
+
+
+9. Տրված է հետևյալ ամսաթիվը․ 01/02/1970
+Ձևափոխել այն՝ բերելով հետևյալ ֆորմատի․ 1970-02-01
+
+
+Professional@User-PC MINGW64 ~
+$ echo "01/02/1970" | sed -E "s~([0-9]{2})[/]([0-9]{2})[/]([0-9]{4})~\3-\2-\1~"
+1970-02-01
+
+//sed (stream editor) ծրագիրն օգտագործվում է տեքստում
+// փոփոխություններ կատարելու նպատակով։
+
+//([0-9]{2})`համապատասխանում է երկու թվանշաններին(օր)
+//և դրանք պահում է առաջին խմբում:
+
+//[/] ՝ամսաթվերի միջև դրվող սլեշի սիմվոլը:
+
+//([0-9]{2})`համապատասխանում է երկու թվանշաններին(ամիս)
+//և դրանք պահում է երկրորդ խմբում:
+//([0-9]{4}) ՝տարին։
+
+// \3 ՝Սա ռեգուլյար արտահայտության երրորդ խմբի 
+//հետադարձ հղումն է, որը տարին է:
+
+// \2 ՝ ամսվա հետադարձ հղումն է
+// \1 ՝ օրվա հետադարձ հղումն է
+
+
+10. Տրված է հետևյալ հեռախոսահամարը․ 0xx 12-34-56
+Ձևափոխել այն՝ բերելով հետևյալ ֆորմատի․ (0xx) 123-456
+
+Professional@User-PC MINGW64 ~
+$ echo "0xx 12-34-56" | sed -E "s~([0][a-z]{2})[[:space:]]([0-9]{2})[-]([0-9])([0-9])[-]([0-9]{2})~(\1) \2\3-\4\5~"
+(0xx) 123-456
+// s հրամանը (substitute), փնտրում է և փոխարինում տողերը
+
+//ներքևում ավելացրել եմ 3-րդ պահանջի շարունակությունը
+[.exe*
+addgnupghome*
+applygnupgdefaults*
+arch.exe*
+astextplain*
+autopoint*
+awk.exe*
+b2sum.exe*
+backup*
+base32.exe*
+base64.exe*
+basename.exe*
+basenc.exe*
+bash.exe*
+bashbug*
+bunzip2.exe*
+bzcat.exe*
+bzcmp*
+bzdiff*
+bzegrep*
+bzfgrep*
+bzgrep*
+bzip2.exe*
+bzip2recover.exe*
+bzless*
+c_rehash*
+captoinfo.exe*
+cat.exe*
+chattr.exe*
+chcon.exe*
+chgrp.exe*
+chmod.exe*
+chown.exe*
+chroot.exe*
+cksum.exe*
+clear.exe*
+cmp.exe*
+column.exe*
+comm.exe*
+core_perl/
+cp.exe*
+csplit.exe*
+cut.exe*
+cygcheck.exe*
+cygpath.exe*
+cygwin-console-helper.exe*
+d2u.exe*
+dash.exe*
+date.exe*
+dd.exe*
+df.exe*
+diff.exe*
+diff3.exe*
+dir.exe*
+dircolors.exe*
+dirmngr-client.exe*
+dirmngr.exe*
+dirname.exe*
+docx2txt*
+docx2txt.pl*
+dos2unix.exe*
+du.exe*
+dumpsexp.exe*
+echo.exe*
+egrep*
+env.exe*
+envsubst.exe*
+ex.exe*
+expand.exe*
+expr.exe*
+factor.exe*
+false.exe*
+fgrep*
+file.exe*
+find.exe*
+findssl.sh*
+fmt.exe*
+fold.exe*
+funzip.exe*
+gawk-5.0.0.exe*
+gawk.exe*
+gencat.exe*
+getconf.exe*
+getemojis*
+getfacl.exe*
+getflags*
+getopt.exe*
+gettext.exe*
+gettext.sh*
+gettextize*
+git-flow*
+git-flow-bugfix
+git-flow-config
+git-flow-feature
+git-flow-hotfix
+git-flow-init
+git-flow-log
+git-flow-release
+git-flow-support
+git-flow-version
+gitflow-common
+gitflow-shFlags
+gkill.exe*
+gmondump.exe*
+gpg-agent.exe*
+gpg-connect-agent.exe*
+gpg-error.exe*
+gpg-wks-server.exe*
+gpg.exe*
+gpgconf.exe*
+gpgparsemail.exe*
+gpgscm.exe*
+gpgsm.exe*
+gpgsplit.exe*
+gpgtar.exe*
+gpgv.exe*
+grep.exe*
+groups.exe*
+gunzip*
+gzexe*
+gzip.exe*
+head.exe*
+hmac256.exe*
+hostid.exe*
+hostname.exe*
+iconv.exe*
+id.exe*
+infocmp.exe*
+infotocap.exe*
+install.exe*
+join.exe*
+kbxutil.exe*
+kill.exe*
+ldd.exe*
+ldh.exe*
+less.exe*
+lessecho.exe*
+lesskey.exe*
+link.exe*
+ln.exe*
+locale.exe*
+locate.exe*
+logname.exe*
+ls.exe*
+lsattr.exe*
+mac2unix.exe*
+md5sum.exe*
+minidumper.exe*
+mintheme*
+mintty.exe*
+mkdir.exe*
+mkfifo.exe*
+mkgroup.exe*
+mknod.exe*
+mkpasswd.exe*
+mktemp.exe*
+mount.exe*
+mpicalc.exe*
+msgattrib.exe*
+msgcat.exe*
+msgcmp.exe*
+msgcomm.exe*
+msgconv.exe*
+msgen.exe*
+msgexec.exe*
+msgfilter.exe*
+msgfmt.exe*
+msggrep.exe*
+msginit.exe*
+msgmerge.exe*
+msgunfmt.exe*
+msguniq.exe*
+msys-2.0.dll*
+msys-apr-1-0.dll*
+msys-aprutil-1-0.dll*
+msys-asn1-8.dll*
+msys-assuan-0.dll*
+msys-bz2-1.dll*
+msys-cbor-0.10.dll*
+msys-com_err-1.dll*
+msys-crypt-0.dll*
+msys-crypt-2.dll*
+msys-crypto-3.dll*
+msys-edit-0.dll*
+msys-expat-1.dll*
+msys-ffi-8.dll*
+msys-fido2-1.dll*
+msys-gcc_s-seh-1.dll*
+msys-gcrypt-20.dll*
+msys-gettextlib-0-22.dll*
+msys-gettextsrc-0-22.dll*
+msys-gmp-10.dll*
+msys-gnutls-30.dll*
+msys-gpg-error-0.dll*
+msys-gssapi-3.dll*
+msys-hcrypto-4.dll*
+msys-heimbase-1.dll*
+msys-heimntlm-0.dll*
+msys-hogweed-6.dll*
+msys-hx509-5.dll*
+msys-iconv-2.dll*
+msys-idn2-0.dll*
+msys-intl-8.dll*
+msys-kafs-0.dll*
+msys-krb5-26.dll*
+msys-ksba-8.dll*
+msys-lz4-1.dll*
+msys-lzma-5.dll*
+msys-magic-1.dll*
+msys-mpfr-6.dll*
+msys-ncursesw6.dll*
+msys-nettle-8.dll*
+msys-npth-0.dll*
+msys-p11-kit-0.dll*
+msys-pcre-1.dll*
+msys-pcre2-8-0.dll*
+msys-pcre2-posix-3.dll*
+msys-perl5_36.dll*
+msys-psl-5.dll*
+msys-readline8.dll*
+msys-roken-18.dll*
+msys-sasl2-3.dll*
+msys-serf-1-0.dll*
+msys-smartcols-1.dll*
+msys-sqlite3-0.dll*
+msys-ssl-3.dll*
+msys-svn_client-1-0.dll*
+msys-svn_delta-1-0.dll*
+msys-svn_diff-1-0.dll*
+msys-svn_fs-1-0.dll*
+msys-svn_fs_fs-1-0.dll*
+msys-svn_fs_util-1-0.dll*
+msys-svn_fs_x-1-0.dll*
+msys-svn_ra-1-0.dll*
+msys-svn_ra_local-1-0.dll*
+msys-svn_ra_serf-1-0.dll*
+msys-svn_ra_svn-1-0.dll*
+msys-svn_repos-1-0.dll*
+msys-svn_subr-1-0.dll*
+msys-svn_swig_perl-1-0.dll*
+msys-svn_wc-1-0.dll*
+msys-tasn1-6.dll*
+msys-ticw6.dll*
+msys-unistring-5.dll*
+msys-uuid-1.dll*
+msys-wind-0.dll*
+msys-z.dll*
+msys-zstd-1.dll*
+mv.exe*
+nano.exe*
+nettle-hash.exe*
+nettle-lfib-stream.exe*
+nettle-pbkdf2.exe*
+ngettext.exe*
+nice.exe*
+nl.exe*
+nohup.exe*
+notepad*
+nproc.exe*
+numfmt.exe*
+od.exe*
+openssl.exe*
+p11-kit.exe*
+passwd.exe*
+paste.exe*
+patch.exe*
+pathchk.exe*
+perl.exe*
+perl5.36.1.exe*
+pinentry-w32.exe*
+pinentry.exe*
+pinky.exe*
+pkcs1-conv.exe*
+pldd.exe*
+pluginviewer.exe*
+pr.exe*
+printenv.exe*
+printf.exe*
+profiler.exe*
+ps.exe*
+psl-make-dafsa*
+psl.exe*
+ptx.exe*
+pwd.exe*
+readlink.exe*
+realpath.exe*
+rebase.exe*
+rebaseall*
+recode-sr-latin.exe*
+regtool.exe*
+reset.exe*
+restore*
+rm.exe*
+rmdir.exe*
+rnano.exe*
+runcon.exe*
+rview.exe*
+rvim.exe*
+scp.exe*
+sdiff.exe*
+sed.exe*
+seq.exe*
+setfacl.exe*
+setmetamode.exe*
+sexp-conv.exe*
+sftp.exe*
+sh.exe*
+sha1sum.exe*
+sha224sum.exe*
+sha256sum.exe*
+sha384sum.exe*
+sha512sum.exe*
+shred.exe*
+shuf.exe*
+sleep.exe*
+sort.exe*
+split.exe*
+ssh-add.exe*
+ssh-agent.exe*
+ssh-copy-id*
+ssh-keygen.exe*
+ssh-keyscan.exe*
+ssh-pageant.exe*
+ssh.exe*
+sshd.exe*
+ssp.exe*
+start*
+stat.exe*
+stdbuf.exe*
+strace.exe*
+stty.exe*
+sum.exe*
+sync.exe*
+tabs.exe*
+tac.exe*
+tail.exe*
+tar.exe*
+tee.exe*
+test.exe*
+tic.exe*
+tig.exe*
+timeout.exe*
+toe.exe*
+touch.exe*
+tput.exe*
+tr.exe*
+true.exe*
+truncate.exe*
+trust.exe*
+tset.exe*
+tsort.exe*
+tty.exe*
+tzset.exe*
+u2d.exe*
+umount.exe*
+uname.exe*
+uncompress*
+unexpand.exe*
+uniq.exe*
+unix2dos.exe*
+unix2mac.exe*
+unlink.exe*
+unzip.exe*
+unzipsfx.exe*
+update-ca-trust*
+updatedb*
+users.exe*
+vdir.exe*
+vendor_perl/
+vi*
+view.exe*
+vim.exe*
+vimdiff.exe*
+vimtutor*
+watchgnupg.exe*
+wc.exe*
+which.exe*
+who.exe*
+whoami.exe*
+winpty-agent.exe*
+winpty-debugserver.exe*
+winpty.dll*
+winpty.exe*
+wordpad*
+xargs.exe*
+xgettext.exe*
+xxd.exe*
+yat2m.exe*
+yes.exe*
+zcat*
+zcmp*
+zdiff*
+zegrep*
+zfgrep*
+zforce*
+zgrep*
+zipgrep*
+zipinfo.exe*
+zless*
+znew*
