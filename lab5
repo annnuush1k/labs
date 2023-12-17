@@ -1,0 +1,190 @@
+lab5
+#!/bin/bash
+
+1. Ստեղծել կամայական արժեքով փոփոխական՝ str: Ցուցադրել հետևյալ հրամանների
+աշխատանքի արդյունքի տարբերությունը.
+echo $str2
+echo ${str}
+//$ սիմվոլը ավելացնում են անվան սկզբից փոփոխականի արժեքը կարդալու համար։
+Professional@User-PC MINGW64 ~
+$ echo $str2
+
+//Այս հրամանը կստեղծվի str2 անունով փոփոխականի արժեքը: 
+//Եթե str2-ը սահմանված չէ, այն կարտածի դատարկ տող(ինչպես վերևում):
+
+Professional@User-PC MINGW64 ~
+$ echo ${str}2
+HELLO2
+//Այս հրամանը միավորում է str անունով փոփոխականի արժեքը 2 նիշի հետ 
+//և տպում է արդյունքը:(եթե str-ը սահմանված չէ, կտպի միայն 2)
+
+2. Արտածել հետևյալ արտահայտության արժեքը. (5^2∗4)/10
+
+Professional@User-PC MINGW64 ~
+$ echo $(((5**2 * 4) / 10 ))
+10
+//** ` Աստիճանի բարձրացում:
+//arithmetic expansion օպերատորի միջոցով, որն ունի հետևյալ տեսքը` $(( )
+
+
+3. Ցուցադրել հետևյալ հրամանների աշխատանքի արդյունքի տարբերությունը․
+echo "The balance for user $USER is: $5.00"
+echo "The balance for user $USER is: \$5.00"
+
+Professional@User-PC MINGW64 ~
+$ echo "The balance for user $USER is: $5.00"
+The balance for user  is: .00
+//$5-ը հասկանում է որպես հինգերորդ արգումենտ,որը փոխանցվում է ֆունկցիային: 
+//Եթե չկա տպում է 0
+
+Professional@User-PC MINGW64 ~
+$ echo "The balance for user $USER is: \$5.00"
+The balance for user  is: $5.00
+//հասկանում է որպես տողի մաս(տեքստ),այլ ոչ թե փոփոխական
+
+
+4. Ցուցադրել հետևյալ հրամանների աշխատանքի արդյունքի տարբերությունը․
+echo '$USER $((2 + 2)) $(ls)'
+echo "$USER $((2 + 2)) $(ls)"
+
+Professional@User-PC MINGW64 ~
+$ echo '$USER $((2 + 2)) $(ls)'
+$USER $((2 + 2)) $(ls)
+//Այստեղ չակերտների մեջ գտնվող բոլոր նիշերը պահպանվում են,
+// իսկ փոփոխականները չեն ընդլայնվում:
+
+Professional@User-PC MINGW64 ~/lab5
+$ echo "$USER $((2 + 2)) $(ls)"
+bash: ls: command not found
+ 4
+//կրկնակի չակերտները թույլ են տալիս փոփոխականների և հրամանների փոխարինում:
+// $USER-ը փոխարինվում է իրական օգտագործողի անունով
+// $((2 + 2)) գրվում է 4
+// $(ls)-ը փոխարինվում է ls հրամանի ելքով:
+
+//նաև պետք է արտածեր ընթացիկ դիրեկտորիայի ֆայլերը(բայց չարեց¿)
+
+
+5. Առանձին տողերում արտածել ընթացիկ դիրեկտորիան և այնտեղ առկա տեքստային
+ֆայլերի քանակը։ Օգտագործել Here document:
+
+ cat <<EOF
+    Current Directory: $(pwd)
+    Number of Files: $(ls | wc -l)
+    EOF
+//cat <<EOF ` Սա Here Document-ի սկիզբն է:
+//$(pwd) ` հրամանի փոխարինում
+//$(ls | wc -l) `հրամանի փոխարինում, հաշվում է ls հրամանից ստացվող տողերի քանակը
+//EOF `Here Document-ի ավարտն է
+
+Current Directory: /c/Users/Professional/lab5
+Number of Files: 3
+
+
+6. Գրել 2 թվեր գումարող ֆունկցիա։ Թվերը ֆունկցիային փոխանցել որպես
+արգումենտներ։
+
+Professional@User-PC MINGW64 ~
+$ sum_num() {
+> result=$(($1 + $2))
+> echo "The sum of $1 and $2 is: $result"
+> }
+
+Professional@User-PC MINGW64 ~
+$ sum_num 4 7
+The sum of 4 and 7 is: 11
+
+
+7. Գրել ֆունկցիա, որը որպես արգումենտ կստանա դիրեկտորիայի անվանումը և
+կարտածի այնտեղ առկա ֆայլերի քանակը։
+
+Professional@User-PC MINGW64 ~
+$ count_files_in_dir() {
+> dir_name="$1"
+> files_num=$(ls "$dir_name" | wc -l)
+> echo "Number of files in $dir_name: $files_num"
+> }
+
+count_files_in_directory "/c/Users/Professional/lab5"
+//wc -l տողերի քանակը հաշվելու համար, որը հավասար է ֆայլերի քանակին։
+
+Number of files in /c/Users/Professional/lab5: 3
+
+
+8. Գրել սկրիպտ, որում նոր ստեղծված ֆայլի համար ստուգել, թե արդյոք այն ունի
+կարդալու / գրելու / կատարելու թույլտվություն, և արտածել համապատասխան
+հաղորդագրություն։
+
+Professional@User-PC MINGW64 ~
+$ #!/bin/bash
+
+check_permissions() {
+ filename="file.txt"
+
+    if [ -e "$filename" ]; then
+        echo "File $filename exists."
+
+        if [ -r "$filename" ]; then
+            echo "File $filename has read permission."
+        fi
+
+        if [ -w "$filename" ]; then
+            echo "File $filename has write permission."
+        fi
+
+        if [ -x "$filename" ]; then
+            echo "File $filename has execute permission."
+        fi
+
+    else
+        echo "File $filename does not exist."
+    fi
+}
+    Professional@User-PC MINGW64 ~
+        File file.txt exists.
+        File file.txt has read permission.
+        File file.txt has write permission.
+
+9. Գրել սկրիպտ, որը կորոշի տրված 2 թվերից մեծագույնը և կարտածի։
+
+Professional@User-PC MINGW64 ~
+$ find_max() {
+> if [ $1 -gt $2 ]; then
+> echo "The largest number is: $1"
+> else
+> echo "The largest number is: $2"
+> fi
+> }
+
+Professional@User-PC MINGW64 ~
+$ find_max 14 19
+The largest number is: 19
+//-gt-ն կիրառվում է երկու թվերը համեմատելու և որոշելու համար, թե որն է ավելի մեծ:
+
+//-gt-ն վերադարձնում է true, եթե -gt-ի ձախ արժեքն ավելի մեծ է,
+// քան -gt-ի աջ կողմում գտնվող արժեքը:
+
+//սկրիպտը կստուգի ՝ if [ 14 -gt 19 ], որը կվերադարձնի false, քանի որ 14-ը 19-ից մեծ չէ:
+// Այնուհետև կկատարվի else ճյուղը, և սկրիպտը կտպի 19:
+
+
+10. Գրել սկրիպտ, որը կորոշի տրված թիվը զույգ է, թե կենտ։ Արտածել համապատասխան
+հաղորդագրություն։
+
+Professional@User-PC MINGW64 ~
+$ check_even_odd() {
+> if [ $(($num % 2)) -eq 0 ]; then
+> echo "$num is an even number."
+> else
+> echo "$num is an odd number."
+> fi
+> }
+
+Professional@User-PC MINGW64 ~
+$ check_even_odd 15
+15 is an odd number.
+
+Professional@User-PC MINGW64 ~
+$ check_even_odd 24
+24 is an even number.
+//-eq օգտագործվում է թվերի հավասարությունը ստուգելու համար
