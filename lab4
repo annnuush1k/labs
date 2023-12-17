@@ -1,0 +1,140 @@
+lab4 
+
+Professional@User-PC MINGW64 ~
+$ #!/bin/bash
+
+1. Ստեղծել նոր ֆայլ՝ file.txt, և դրա համար սահմանել հետևյալ իրավունքները․ - rwx r-- r--
+
+Professional@User-PC MINGW64 ~
+$ touch file.txt
+
+Professional@User-PC MINGW64 ~
+$ chmod 744 file.txt
+//rwx `7
+//r-- `4
+
+
+2. Փոփոխել file.txt ֆայլի իրավունքները՝ բոլոր օգտատերերի համար ավելացնելով
+կատարելու իրավունք։ Օգտվել ֆայլի ռեժիմների սիմվոլիկ ներկայացումից։
+
+Professional@User-PC MINGW64 ~
+$ chmod a+x file.txt
+//+ - ավելացնել իրավունք (Օր․՝ u+x – սեփականատիրոջ համար ավելացնում է
+կատարելու իրավունք)
+//a ` All – u, g, o սիմվոլների համատեղում
+
+
+3. Փոփոխել file.txt ֆայլի իրավունքները՝ խմբի օգտատերերի և այլ օգտատերերի համար
+հեռացնելով կատարելու իրավունքը։ Օգտվել սիմվոլիկ ներկայացումից։
+
+Professional@User-PC MINGW64 ~
+$ chmod go-x file.txt
+//- ` հեռացնել իրավունք
+
+
+4. Փոփոխել file.txt ֆայլի իրավունքները՝ հեռացնելով բոլոր իրավունքները, և
+սահմանելով գրելու և կարդալու իրավունքներ միայն ֆայլի սեփականատիրոջ համար։
+Նույն գործողությունը կատարել 2 անգամ ՝ օգտվելով ֆայլի ռեժիմների 8-ական և
+սիմվոլիկ ներկայացումներից։
+
+Professional@User-PC MINGW64 ~
+$ chmod 600 file.txt
+//ստանում է կարդալու`4, և գրելու`2 իրավունք
+
+Professional@User-PC MINGW64 ~
+$ chmod u=rw file.txt
+
+5. Ստեղծել նոր դիրեկտորիա՝ dir: Սահմանել հետևյալ իրավունքները․ d rw- rw- rw-։ dir
+դիրեկտորիայում ստեղծել նոր ֆայլ՝ file.txt։ Բացատրել ստացված
+հաղորդագրությունը։ Փոփոխել դիրեկտորիայի իրավունքներն այնպես, որ ֆայլը
+հաջողությամբ ստեղծվի։
+
+Professional@User-PC MINGW64 ~
+$ mkdir dir
+//Ստեղծել նոր դիրեկտորիա՝ dir:
+
+Professional@User-PC MINGW64 ~
+$ chmod 666 dir
+//Սահմանել հետևյալ իրավունքները․ d rw- rw- rw-։
+
+Professional@User-PC MINGW64 ~
+$ touch dir/file.txt
+//dir դիրեկտորիայում ստեղծել նոր ֆայլ՝ file.txt։
+//նոր ֆայլ ստեղծելու համար չունենք բավարար թույլատրություն
+
+Professional@User-PC MINGW64 ~
+$ chmod 775 dir
+
+Professional@User-PC MINGW64 ~
+$ touch dir/file.txt
+
+
+6. dir դիրեկտորիայում ստեղծել ևս 2 ֆայլ՝ file1.txt, file2.txt։ Մեկ հրամանի կատարմամբ
+փոփոխել դիրեկտորիայի բոլոր ֆայլերի իրավունքները՝ սահմանելով - rwx rw- rw-։
+
+Professional@User-PC MINGW64 ~
+$ touch dir/file1.txt dir/file2.txt
+
+Professional@User-PC MINGW64 ~
+$ chmod 766 dir/*
+// * `դիրեկտորիայի բոլոր ֆայլերի համար
+
+
+7. umask հրամանի միջոցով սահմանել այնպիսի bitmask, որ նոր ստեղծվող ֆայլերը
+լռելյայն կերպով ունենան հետևյալ իրավունքները․ - rw- r-- ---
+
+
+Professional@User-PC MINGW64 ~
+$ umask 0026
+//կամ umask 027
+//octal(8) համակարգում `0026
+//երկուական(2) համակարգում ` 0 000 010 110
+
+
+8. umask հրամանի միջոցով սահմանել այնպիսի bitmask, որ նոր ստեղծվող ֆայլերը
+լռելյայն կերպով ունենան հետևյալ իրավունքները․ - rw- --- ---: Վերադարձնել bitmask-ի
+լռելյայն արժեքը՝ կատարելով umask 0022 հրամանը։
+
+Professional@User-PC MINGW64 ~
+$ umask 0066
+//կունենան հետևյալ իրավունքները․ - rw- --- ---
+
+Professional@User-PC MINGW64 ~
+$ umask 0022
+//Վերադարձում է bitmask-ի լռելյայն արժեքը
+
+
+9. Ստեղծել սկրիպտ, որը կարտածի /home/student դիրեկտորիայի ֆայլերի ցուցակը։
+Սկրիպտի համար սահմանել - -wx r-- r-- իրավունքները։ Կատարել սկրիպտը և
+բացատրել ստացված հաղորդագրությունը։ Փոփոխել իրավունքներն այնպես, որ
+սկրիպտը կատարվի։
+
+Professional@User-PC MINGW64 ~/lab4
+$ cat > script.sh
+#!/bin/bash
+ls ~/lab4
+// կկատարվի lab4 դիրեկտորիայի համար 
+
+Professional@User-PC MINGW64 ~/lab4
+$ chmod 0344 script.sh
+// չկա բավարար թույլատրություն սկրիպտը աշխատացնելու համար
+// փոխենք թույլատրությունները, սկրիպտը աշխատացնելու համար
+Professional@User-PC MINGW64 ~/lab4
+$ chmod +x script.sh
+
+Professional@User-PC MINGW64 ~/lab4
+$ ./script.sh
+file.txt  script.sh
+//Սա թույլ կտա աշխատացնել սկրիպտը,
+// և կտեսնեք ֆայլերի ցանկը /lab4-ում:
+
+
+10. Սկրիպտը տեղադրել ~/bin դիրեկտորիայում։ Փոփոխել $PATH փոփոխականն այնպես,
+որ սկրիպտը հնարավոր լինի կատարել առանց հասցեն նշելու։
+
+Professional@User-PC MINGW64 ~/lab4
+$ mv script.sh ~/bin
+
+Professional@User-PC MINGW64 ~/lab4
+$ export PATH=~/bin:"$PATH"
+//"$PATH"-ը PATH փոփոխականի ընթացիկ արժեքն է:
