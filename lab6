@@ -1,0 +1,308 @@
+lab6
+
+1. Գրել սկրիպտ, որը տրված թվի համար կարտածի հաղորդագրություն այն մասին,
+արդյոք թիվը դրական է, բացասական, թե՝ 0։ Թիվը վավերացնել ռեգուլյար
+արտահայտության միջոցով։ Պայմանների ստուգման համար օգտագործել [[ ]]
+օպերատորը։
+Professional@User-PC MINGW64 ~
+$ #!/bin/bash
+
+Professional@User-PC MINGW64 ~
+$ check_num() {
+> read -p "Enter a number: " num
+> if [[ $num -gt 0 ]]; then
+> echo "The number is positive."
+> elif [[ $num -lt 0 ]]; then
+> echo "The number is negative."
+> else
+> echo "The number is 0."
+> fi
+> }
+
+Professional@User-PC MINGW64 ~
+$ check_num 
+Enter a number: 18
+The number is positive.
+
+Professional@User-PC MINGW64 ~
+$ check_num
+Enter a number: -5
+The number is negative.
+
+Professional@User-PC MINGW64 ~
+$ check_num
+Enter a number: 0
+The number is 0.
+
+//if [[ $num -gt 0 ]]; այս պայմանը ստուգում է, արդյոք մուտքագրված թիվը դրական է:
+
+//elif [[ $num -lt 0 ]];այս պայմանը երկրորդական է,
+//այն ստուգում է արդյոք թիվը բացասական է:
+
+
+2. Կատարել 1-ին կետը՝ պայմանների ստուգման համար օգտագործելով (( ))
+օպերատորը։
+
+Professional@User-PC MINGW64 ~
+$ check_num() {
+> read -p "Enter a number: " num
+> if ((num > 0)); then
+> echo "The number is positive."
+> elif ((num < 0)); then
+> echo "The number is negative."
+> else
+> echo "The number is 0."
+> fi
+> }
+
+Professional@User-PC MINGW64 ~
+$ check_num
+Enter a number: 21
+The number is positive.
+
+Professional@User-PC MINGW64 ~
+$ check_num
+Enter a number: -14
+The number is negative.
+
+Professional@User-PC MINGW64 ~
+$ check_num
+Enter a number: 0
+The number is 0.
+
+
+3. Գրել սկրիպտ, որը կստուգի,
+թե արդյոք տրված թիվը 2-ի, 3-ի և 5-ի բազմապատիկ է։
+
+Professional@User-PC MINGW64 ~
+$ check_function() {
+> read -p "Enter a number: " num
+> if ((num % 2 == 0)) && ((num % 3 == 0)) && ((num % 5 == 0)); then
+> echo "The number is a multiple of 2, 3 and 5."
+> else
+> echo "The number is not a multiple of 2, 3 and 5."
+> fi
+> }
+
+Professional@User-PC MINGW64 ~
+$ check_function
+Enter a number: 30
+The number is a multiple of 2, 3 and 5.
+
+Professional@User-PC MINGW64 ~
+$ check_function
+Enter a number: 15
+The number is not a multiple of 2, 3 and 5.
+
+
+4. Գրել սկրիպտ, որը կստուգի,
+թե արդյոք տրված թիվը 2-ի, 3-ի կամ 5-ի բազմապատիկ է։
+
+Professional@User-PC MINGW64 ~
+$ again_check_function() {
+> read -p "Enter a number: " num
+> if ((number % 2 == 0 || number % 3 == 0 || number % 5 == 0)); then
+> echo "The number is a multiple of 2, 3 or 5."
+> else
+> echo "The number is not a multiple of 2, 3 or 5."
+> fi
+> }
+
+Professional@User-PC MINGW64 ~
+$ again_check_function
+Enter a number: 6
+The number is a multiple of 2, 3 or 5.
+
+Professional@User-PC MINGW64 ~
+$ again_check_function
+Enter a number: 9
+The number is a multiple of 2, 3 or 5.
+
+
+5. Մեկ հրամանի միջոցով ստեղծել նոր ֆայլ և այդ ֆայլին ավելացնել կատարելու
+թույլտվություն։
+
+
+  Professional@User-PC MINGW64 ~
+    $ touch new_file.txt && chmod +x new_file.txt
+//+x `ավելացնում է կատարելու թույլտվություն բոլոր user-ների համար:
+
+
+6. Մեկ հրամանի միջոցով ստուգել, թե արդյոք գոյություն ունի dir անունով դիրեկտորիա,
+և, եթե գոյություն չունի, ապա ստեղծել։
+
+
+Professional@User-PC MINGW64 ~
+$ [ -d "dir" ] || mkdir "dir"
+
+//[ -d "dir" ] `Այս պայմանը ստուգում է,
+// թե արդյոք կա «dir» անունով դիրեկտորիա:
+
+7. Գրել սկրիպտ, որը կստուգի, թե արդյոք տրված թիվը գտնվում է սահմանված
+միջակայքում։ Ստուգվող թիվը և միջակայքի սահմանների թվերը ներմուծել read
+հրամանի միջոցով։ Իրականացնել տվյալների վավերացում:
+
+Professional@User-PC MINGW64 ~
+$ #!/bin/bash
+
+Professional@User-PC MINGW64 ~
+$ invalid_input () {
+> if [[ $input =~ ^-?[[:digit:]]+$ ]]; then
+> echo "$input is an integer."
+> else
+> echo "$input is not an integer."
+> fi
+> }
+//Այս ֆ-իան նախատեսված է ստուգելու համար, 
+//թե արդյոք մուտքային տողը ամբողջ թիվ է։(պարտադիր չէր գրել այս ֆ-իան)
+
+//^ ՝տողի սկիզբ
+//-? ՝հնարավոր մինուս նշանի համար
+//[[:digit:]]+ ՝մեկ կամ մի քանի թվեր
+//$ ՝տողի վերջ
+
+> read -p "Enter a number: " num; 
+> read -p "Enter the lower limit of the range: " lower
+> read -p "Enter the upper limit of the range: " upper
+
+ invalid_input $num
+ invalid_input $lower
+ invalid_input $upper
+
+> if ((num >= lower)) && ((num <=upper)); then
+> echo "The number is in the specified range."
+> else
+> echo "The number is outside the specified range."
+> fi
+
+Professional@User-PC MINGW64 ~
+$ check_f
+Enter a number: 22
+Enter the lower limit of the range: 5
+Enter the upper limit of the range: 56
+Professional@User-PC MINGW64 ~
+$ check_f1
+The number is in the specified range.
+
+Professional@User-PC MINGW64 ~
+$ check_f
+Enter a number: 25
+Enter the lower limit of the range: 44
+Enter the upper limit of the range: 121
+Professional@User-PC MINGW64 ~
+$ check_f1
+The number is outside the specified range.
+
+
+8. Գրել սկրիպտ, որը որպես ներմուծվող արժեք կստանա մեկ բառ, և կստուգի արդյոք այն
+համընկնում է "Secret" բառի հետ։ read հրամանը կատարել այնպես, որ ներմուծված
+արժեք պահպանվի REPLY փոփոխականի մեջ, իսկ ներմուծումն իրականացնելիս
+տառերը չցուցադրվեն էկրանին։
+
+Professional@User-PC MINGW64 ~
+$ check_word() {
+> read -s -p "Enter a word: " secret
+> if [[ $secret == "Secret" ]]; then
+> echo - e "\nYou entered the secret word."
+> else
+> echo -e "\nIncorrect word."
+> fi
+> }
+//-s-ն օգտագործվում է գաղտնի մուտքագրման համար
+
+Professional@User-PC MINGW64 ~
+$ check_word
+Enter a word: 
+You entered the secret word.
+
+Professional@User-PC MINGW64 ~
+$ check_word
+Enter a word:
+Incorrect word.
+
+
+9. Գրել սկրիպտ, որը որպես ներմուծվող արժեք կստանա ֆայլի անուն։ Վավերացնել
+անունը հետևյալ կանոններով․ կարող է պարունակել տառեր, թվեր, - . _ սիմվոլները։
+Եթե նման ֆայլ գոյություն չունի, ապա ստեղծել։ Ցուցադրել համապատասխան
+հաղորդագրություն ֆայլի ստեղծման կամ առկայության մասին։
+
+Professional@User-PC MINGW64 ~
+$ fun() {
+> read -r -p "Enter a filename: " filename
+> if [[ "$filename" =~ ^[A-Za-z0-9._-]+$ ]];
+> then
+> touch "$filename"
+> echo "File $filename has been created."
+> else
+> echo "Invalid filename."
+> fi
+> }
+//-r ՝անջատում է հետադարձ հղումը 
+
+
+10. Գրել <<Հաշվիչ>> ծրագիր, որը կստանա ճիշտ 3 արժեք հետևյալ հաջորդականությամբ․
+թիվ, գործողություն, թիվ։ Օր՝ 2 + 3։ Ստուգել ներմուծված արժեքների քանակը, և 3-ից
+տարբեր լինելու դեպքում արտածել հաղորդագրություն սխալի մասին։ Իրականացնել
+արժեքների վավերացում։ Գործողության համար սահմանել հետևյալ ընդունելի
+արժեքները․ + - * / **։ Արտածել գործողության արդյունքը։
+
+invalid_input() { 
+> if [[ $1 =~ ^-?[[:digit:]]+$ ]]; then
+> echo "$1 is an integer."
+> else 
+> echo "$1 is not an integer."
+> exit 1
+> fi
+> if [[ $2 =~ ^[-+\*/**]$ ]]; then
+> echo "$2 is a right operator."
+> else
+> echo "$2 is not a right operator."
+> exit 1
+> fi
+> if [[ $3 =~ ^-?[[:digit::]]+$ ]]; then
+> echo "$3 is an integer."
+> else
+> echo "$3 is not an integer."
+> exit 1
+> fi
+>if [[ $4 ]]
+> then echo "Too many variables."
+> exit 1
+> fi
+> }
+
+answer() { 
+> result=$(($1 $2 $3))
+> echo "Result: $result"
+> }
+
+    read -p "Enter: " 
+    // ներմուծվող տվյալները կպահպանվեն REPLY փոփոխականի մեջ
+
+    echo $REPLY
+    invalid_input $REPLY
+
+    answer $REPLY
+
+Professional@User-PC MINGW64 ~
+    $ Enter: 3 + 54
+        3 + 54
+        3 is an integer.
+        + is a right operator.
+        54 is an integer.
+        Result: 57
+//if [[ $1 =~ ^-?[[:digit:]]+$ ]]; ՝ստուգում է արդյոք առաջին
+// արգումենտը ամբողջ թիվ է (հնարավոր է լինի մինուս նշանով):
+
+//if [[ $2 =~ ^[-+\*/**]$ ]]; ՝Ստուգում է  արդյոք երկրորդ
+//արգումենտը հետևյալ  մաթեմատիկական օպերատորներից մեկն է ՝ +, -, *, **
+
+//Եթե ​​պայմանը չկատարվի, կարտածի սխալի մասին, և սկրիպտը կավարտվի 1 կոդով:
+
+// if [[ $3 =~ ^-?[[:digit:]]+$ ]]; ՝ստուգում է արդյոք երրորդ
+// արգումենտը ամբողջ թիվ է (հնարավոր է լինի մինուս նշանով):
+
+//[[ $4 ]]; ՝ստուգում է, արդյոք կա չորրորդ արգումենտ ($4 փոփոխական):
+// Եթե ​​կա, ապա կարտածի, որ չափից շատ փոփոխականներ կան, և սկրիպտը կավարտվի 1 կոդով:
+
+//result=$(($1 $2 $3)) ՝ Կհաշվի թվաբանական գործողության արդյունքը՝ օգտագործելով փոխանցված արգումենտները:
