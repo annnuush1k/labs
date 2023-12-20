@@ -1,0 +1,247 @@
+lab8
+
+1. Գրել ծրագիր, որը ինտերակտիվ ռեժիմում կստանա [0, 3] միջակայքի որևէ թիվ, և արգումենտի արժեքից կախված կկատարի հետևյալ գործողությունները․  0 – ավարտել ծրագիրը։
+ 1 – արտածել /home/student դիրեկտորիայի ֆայլերի ցուցակը։
+ 2 – արտածել /home/student դիրեկտորիայի տեքստային ֆայլերի քանակը։
+ 3 – արտածել աշխատանքային դիրեկտորիան։
+Գործողությունները կրկնել մինչև 0 արժեքի ներմուծումը։ Օգտագործել case օպերատոր։ 
+Professional@User-PC MINGW64 ~
+$ #!/bin/bash
+
+Professional@User-PC MINGW64 ~
+$ while true; do 
+> echo "Please select [0-3] or 0 to quit"
+> read -p "Enter selection [0-3] > "
+> case $REPLY in 
+> 0) 
+> echo "Program terminated."
+> exit
+> ;;
+> 1)
+> echo "Copying list of files in /home/student directory."
+> cp /home/student/* .
+> ;;
+> 2)
+> echo "Number of text files i /home/student directory: $(ls -l /home/student/*.txt | wc -l)"
+> ;;
+> 3) echo "Working directory: $(pwd)"
+> ;;
+> *)
+> echo "Invalid entry" >&2
+> ;;
+> esac
+> done
+//ls՝ կատարվում է .txt ընդլայնմամբ ֆայլերի քանակը հաշվելու և ցուցադրելու համար
+//pwd՝ ընթացիկ աշխատանքային դիրեկտորիան ցուցադրելու համար:
+
+
+2. Գրել ծրագիր, որը որպես արգումենտ կստանա տարվա ամսի անունը և կվերադարձնի տվյալ ամսում առկա օրերի քանակը։ Օգտագործել case օպերատոր։ 
+
+echo "Enter the month name: "
+read -r month
+
+case $month in
+"January" | "March" | "May" | "July" | "August" | "October" | "December")
+ echo "The month $month has 31 days."
+ ;;
+"April" | "June" | "September" | "November")
+ echo "The month $month has 30 days."
+ ;;
+"February")
+ echo "The month $month has 28 or 29 days depending on whether it's a leap year."
+ ;;
+*)
+ echo "Invalid month name."
+ ;;
+esac
+
+
+3. Գրել <<Հաշվիչ>> ծրագիր, որը կստանա ճիշտ 3 արժեք հետևյալ հաջորդականությամբ․
+թիվ, գործողություն, թիվ։ Օր՝ 2 + 3։ Արժեքները ներմուծել ինտերակտիվ ռեժիմում (read հրամանի միջոցով)։
+ Գործողության համար սահմանել հետևյալ ընդունելի արժեքները․ + - * / **։ Արտածել գործողության արդյունքը։ Գործողության տիպը որոշելու համար օգտագործել case օպերատոր։ 
+
+while true; do
+ echo "Enter the first number: "
+ read -r num1
+
+ echo "Enter the operation (+, -, *, /, **): "
+ read -r operation
+
+ echo "Enter the second number: "
+ read -r num2
+
+ case $operation in
+ "+")
+  result=$((num1 + num2))
+  ;;
+ "-")
+  result=$((num1 - num2))
+  ;;
+ "*")
+  result=$((num1 * num2))
+  ;;
+ "/")
+  result=$((num1 / num2))
+  ;;
+ "**")
+  result=$((num1 ** num2))
+  ;;
+ *)
+  echo "Invalid operation."
+  exit 1
+  ;;
+ esac
+ 
+echo "Result: $result"
+done
+
+Enter the first number:
+5
+Enter the operation (+, -, *, /, **):
++
+Enter the second number:
+4
+Result: 9
+
+
+4. Գրել ծրագիր, որը որպես հրամանային տողի արգումենտ կստանա ֆայլի անուն։ Եթե ֆայլը գոյություն ունի և ունի կարդալու թույլտվություն,
+ապա արտածել ֆայլի պարունակությունը, հակառակ դեպքում արտածել համապատասխան հաղորդագրություն։ 
+
+    if [[ -z "$1" ]]; then
+        echo "Error: Please provide a file name as an argument."
+        exit 1 
+    fi
+//Ստուգում ենք, արդյոք ֆայլի անունը տրված է 
+  
+  if [[ ! -f "$1" ]]; then
+        echo "Error: File '$1' does not exist."
+        exit 1
+    fi
+//Ստուգում ենք, արդյոք ֆայլը գոյություն ունի
+   
+ if [[ ! -r "$1" ]]; then
+        echo "Error: File '$1' is not readable."
+        exit 1
+    fi
+//Ստուգում ենք, արդյոք  ֆայլն ունի կարդալու թույլտվություն
+
+    cat "$1"
+//Ֆայլը գոյություն ունի և ունի կարդալու թույլտվություն, պատճենել պարունակությունը
+   
+ echo "File content copied successfully."
+
+
+5. Գրել cp ծրագրի պատճենը՝ առանց cp հրամանից օգտվելու։ Ծրագիրը պետք է որպես արգումենտներ ստանա 2 ֆայլերի անուններ, և պատճենի առաջին ֆայլի պարունակությունը 2-րդի մեջ։
+Իրականացնել ծրագրի պատշաճ աշխատանքի համար հարկավոր ստուգումներ (ֆայլը գոյություն ունի, ունի կարդալու թույլտվություն)։ 
+
+echo "Enter the first filename: "
+read -r file1
+
+echo "Enter the second filename: "
+read -r file2
+
+if [ -r "$file1" ]; then
+ cat "$file1" >"$file2"
+ echo "Content of the file successfully copied."
+else
+ echo "File $file1 does not exist or is not readable."
+fi
+// if [ -r "$file1" ]; ՝ստուգում է, արդյոք $file1 ֆայլը գոյություն ունի և ունի կարդալու թույլտվություն:
+
+
+6. Գրել ծրագիր, որը որպես հրամանային տողի արգումենտներ կստանա 2 թիվ և կարտածի այդ թվերի գումարը։ Իրականացնել արժեքների վավերացում։ 
+
+if [ "$#" -ne 2 ]; then
+ echo "Usage: $0 <num1> <num2>"
+ exit 1
+fi
+
+num1="$1"
+num2="$2"
+
+if ! [[ "$num1" =~ ^[0-9]+$ ]] || ! [[ "$num2" =~ ^[0-9]+$ ]]; then
+ echo "Invalid input. Please enter valid numbers."
+ exit 1
+fi
+
+sum=$((num1 + num2))
+echo  "Sum of the numbers: $sum"
+
+//[ "$#" -ne 2 ]; ՝Այս պայմանը ստուգում է, արդյոք հրամանի տողում փոխանցվում է ճիշտ երկու արգումենտ:
+
+
+7. Գրել ծրագիր, որը որպես հրամանային տողի արգումենտներ կստանա կամայական քանակով արժեքներ և նույնությամբ կարտածի այդ արժեքները։ Օգտագործել while ցիկլ և shift օպերատոր։ 
+
+Professional@User-PC MINGW64 ~
+$ check_f() {
+> while [ "$#" -gt 0 ]; do
+> echo "argument: $1" 
+> shift
+> done 
+> }
+//shift-ը բոլոր արգումենտները տեղափոխում է ձախ՝ հեռացնելով առաջին արգումենտը $1:
+//integer1 -gt integer2 ՝integer1 > integer2
+//$# ՝արգումենտների քանակը(տվյալ դեպքում 4)
+
+Professional@User-PC MINGW64 ~
+$ check_f 15 3 22 143
+argument: 15
+argument: 3
+argument: 22
+argument: 143
+
+
+8. Իրականացնել 7-րդ կետը՝ օգտագործելով for ցիկլ և $@ հատուկ փոփոխականը։ 
+
+Professional@User-PC MINGW64 ~
+$ check1_f() {
+> for argument in "$@"; do
+> echo "Argument: $argument"
+> done
+> }
+
+Professional@User-PC MINGW64 ~
+$ check1_f 14 9 65
+Argument: 14
+Argument: 9
+Argument: 65
+
+
+9. Գրել ծրագիր, որը որպես հրամանային տողի արգումենտներ կստանա կամայական քանակով թվեր և կարտածի այդ թվերի գումարը։ 
+
+  sum=0
+
+ for arg in "$@"; do
+ if [[ "$arg" =~ ^[0-9]+$ ]]; then
+ sum=$((sum + arg))
+ else
+ echo "Invalid input. Please enter valid numbers."
+ exit 1
+ fi
+ done
+
+  echo "Sum of the numbers: $sum"
+
+
+   3 15 1 5
+   Sum of the numbers: 24
+
+
+10. Գրել ծրագիր, որը որպես հրամանային տողի արգումենտներ կստանա կամայական քանակով թվեր և կարտածի զույգ թվերի քանակը։ 
+
+check() {
+> count=0
+> for arg in "$@"; do
+> if [[ "$arg" =~ ^[0-9]+$ && $((arg % 2)) -eq 0 ]]; then
+> count=$((count + 1))
+> fi
+> done
+> echo "Number of even numbers: $count"
+> }
+   
+Professional@User-PC MINGW64 ~
+    $ check 22 11 29 55 6
+        Number of even numbers: 2
+
+//$arg" =~ ^[0-9]+$ `Ստուգում է, արդյոք արգումենտի արժեքը թիվ է (դրական ամբողջ թիվ):
+//$((arg % 2)) -eq 0 ՝Ստուգում է արդյոք թիվը զույգ է (ըստ մոդուլ 2-ի (երբ բաժանվում է 2-ի վրա)):
